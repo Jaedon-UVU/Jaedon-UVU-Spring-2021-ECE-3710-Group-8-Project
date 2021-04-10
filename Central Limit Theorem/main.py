@@ -1,48 +1,108 @@
 # Libraries
+import graph
 import numpy as np
 import cmath as cm
 import random as rn
 import sys
 import time
 
-# Functions
+"""
+    Create a computer simulation of four non-normal random variables. Allowing the user to input the parameters for each
+distribution.
+    > Exponential
+    > Weibull
+    > Uniform
+    > Inverse Triangle
+    
+    Use pre-made random number generators with the correlating distributions. Generate 50,000 random values.
+    Each distribution should have 4 graphs (Histograms)
+"""
 
-# Global Variables
-sample_size = 0
-uniform_random_data = []
-exponential_random_data = []
-weibull_random_data = []
-inverse_pyramid_random_data = []
+
+# Exponential
+def exp_dist():
+    rng = np.random.exponential(size=50000)
+    rng_5 = []
+    rng_30 = []
+    rng_100 = []
+    i = 0
+    while i < 50000:
+        rng_5.append(sum(rng[i:i+5])/5)
+        i += 5
+    i = 0
+    while i < 50000:
+        rng_30.append(sum(rng[i:i+30])/30)
+        i += 30
+    i = 0
+    while i < 50000:
+        rng_100.append(sum(rng[i:i+100])/100)
+        i += 100
+
+    graph.create_hist(rng, 20)
+    graph.create_hist(rng_5, 20)
+    graph.create_hist(rng_30, 20)
+    graph.create_hist(rng_100, 20)
 
 
-# Executable Code
-if __name__ == '__main__':
-    # Random Data Generation
-    sample_size = input("Enter the sample size: ")  # User input
-    # TODO: add more user input parameters
+# Weibull
+def weibull_dist():
+    rng = np.random.weibull(size=50000)
+    pass
 
-    for x in range(int(sample_size)):  # Uniform Generation
-        # TODO: update status on timer
-        sys.stdout.write("\rGenerating Uniform Data{0}/{1}".format(x + 1, sample_size))  # Generation Process Updates
-        sys.stdout.flush()
-        uniform_random_data.append(rn.uniform(0, 1))  # Appending Generated Data
 
-    for x in range(int(sample_size)):  # TODO: Exponential Generation
-        # TODO: update status on timer
-        sys.stdout.write("\rGenerating Uniform Data{0}/{1}".format(x + 1, sample_size))  # Generation Process Updates
-        sys.stdout.flush()
-        exponential_random_data.append("""random data""")  # Appending Generated Data
+# Uniform
+def uni_dist():
+    rng = np.random.uniform(size=50000)
+    rng_5 = []
+    rng_30 = []
+    rng_100 = []
+    i = 0
+    while i < 50000:
+        rng_5.append(sum(rng[i:i + 5]) / 5)
+        i += 5
+    i = 0
+    while i < 50000:
+        rng_30.append(sum(rng[i:i + 30]) / 30)
+        i += 30
+    i = 0
+    while i < 50000:
+        rng_100.append(sum(rng[i:i + 100]) / 100)
+        i += 100
 
-    for x in range(int(sample_size)):  # TODO: Weibull Generation
-        # TODO: update status on timer
-        sys.stdout.write("\rGenerating Uniform Data{0}/{1}".format(x + 1, sample_size))  # Generation Process Updates
-        sys.stdout.flush()
-        weibull_random_data.append("""random data""")  # Appending Generated Data
+    graph.create_hist(rng, 20)
+    graph.create_hist(rng_5, 20)
+    graph.create_hist(rng_30, 20)
+    graph.create_hist(rng_100, 20)
 
-    for x in range(int(sample_size)):  # TODO: Inverse Pyramid Generation
-        # TODO: update status on timer
-        sys.stdout.write("\rGenerating Uniform Data{0}/{1}".format(x + 1, sample_size))  # Generation Process Updates
-        sys.stdout.flush()
-        inverse_pyramid_random_data.append("""random data""")  # Appending Generated Data
 
-    print("\nFinished")
+# Inverse Triangle
+def inv_dist():
+    rng = []
+    for x in np.random.uniform(size=50000):
+        if x < 0.5:
+            rng.append(-2*((-2*x + 1)**(1/2)) - 2)
+        else:
+            rng.append(2*((2*x - 1)**(1/2)) + 2)
+    rng_5 = []
+    rng_30 = []
+    rng_100 = []
+    i = 0
+    while i < 50000:
+        rng_5.append(sum(rng[i:i + 5]) / 5)
+        i += 5
+    i = 0
+    while i < 50000:
+        rng_30.append(sum(rng[i:i + 30]) / 30)
+        i += 30
+    i = 0
+    while i < 50000:
+        rng_100.append(sum(rng[i:i + 100]) / 100)
+        i += 100
+
+    graph.create_hist(rng, 100)
+    graph.create_hist(rng_5, 100)
+    graph.create_hist(rng_30, 100)
+    graph.create_hist(rng_100, 100)
+
+#exp_dist()
+inv_dist()
